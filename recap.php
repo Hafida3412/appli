@@ -14,6 +14,12 @@ session_start();
     <title>Récapitulatif des produits</title>
 </head>
 <body>
+<nav>
+    <ul>
+        <li><a href="index.php">Ajout produit</a></li>
+        <li><a href="recap.php">Récapitulatif des produits</a></li>
+    </ul>
+</nav>
     <?php 
     
    /* EXEMPLE DE TEST AVEC UN PRODUIT BIZARRE/ CELA N A PAS AFFECTE LE TABLEAU GRACE AUX FILTRES:
@@ -64,6 +70,7 @@ echo "<table>",                                                                 
 "</thead>",
 "<tbody>";
 $totalGeneral = 0;
+$totalArticles = 0;
 foreach($_SESSION['products'] as $index => $product){       //$index aura pour valeur l'index du tableau $_SESSION['products'] parcouru
  echo "<tr>",                                                          //$product contiendra le produit, sous forme de tableau, tel que l'a créé 
         "<td>".$index."</td>",                                                   //et stocké en session le fichier traitement.php
@@ -72,7 +79,10 @@ foreach($_SESSION['products'] as $index => $product){       //$index aura pour v
         "<td>".$product['qtt']."</td>",
         "<td>".number_format($product['total'], 2, ",","&nbsp;")."&nbsp;€</td>",
         "</tr>";
-$totalGeneral+= $product['total'];  /* grâce à l'opérateur combiné +=, on ajoute le total du produit 
+$totalGeneral+= $product['total']; 
+$totalArticles+= $product['qtt'];
+
+/* grâce à l'opérateur combiné +=, on ajoute le total du produit 
 parcouru à la valeur de $totalGeneral, qui augmente d'autant pour chaque produit*/
 }
 
@@ -92,9 +102,9 @@ number_format()*/
 echo "<tr>",
       "<td colspan=4>Total général: </td>",
       "<td><strong>".number_format($totalGeneral, 2, ",","&nbsp;")."&nbsp;€<strong></td>",
-      "</tr>",
-
-"</tbody>",
+      "</tr>";
+echo "<p>Nombre total d'articles en session : ".$totalArticles."</p>";
+"</tbody>";
      "</table>";
 }
 

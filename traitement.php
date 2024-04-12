@@ -34,8 +34,13 @@ l'utilisateur ajoute son tout premier produit), PHP la créera au sein de $_SESS
 ajoutons une nouvelle entrée au futur tableau "products" associé à cette clé. 
                 -> $_SESSION["products"] doit être lui aussi un tableau afin d'y stocker de nouveaux 
 produits par la suite.*/
- }
+
+$_SESSION['message'] = "Votre produit a été ajouté avec succès.";
+} else {
+$_SESSION['message'] = "Erreur";
 }
+ }
+
   header("Location:index.php"); //Avec le type d'appel "Location:", cette réponse est envoyée au client avec le
  // status code 302, qui indique une redirection. 
 

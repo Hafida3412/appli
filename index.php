@@ -6,6 +6,14 @@
     <title>Ajout produit</title>
 </head>
 <body>
+
+<nav>
+    <ul>
+        <li><a href="index.php">Ajout produit</a></li>
+        <li><a href="recap.php">Récapitulatif des produits</a></li>
+    </ul>
+</nav>
+
     
   <h1>Ajouter un produit</h1>
   <form action="traitement.php" method="post">
@@ -31,5 +39,15 @@
         <input type="submit" name="submit" value="Ajouter le produit">
     </p>
   </form>
+
+<!--création d'un message (d'erreur ou de succès, selon si le prioduit est rajouté ou pas)-->
+  <?php
+session_start();
+
+if(isset($_SESSION['message'])){
+    echo '<p>' . $_SESSION['message'] . '</p>';
+}
+?>
+
 </body>
 </html>
