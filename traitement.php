@@ -35,6 +35,8 @@ ajoutons une nouvelle entrée au futur tableau "products" associé à cette clé
                 -> $_SESSION["products"] doit être lui aussi un tableau afin d'y stocker de nouveaux 
 produits par la suite.*/
 
+
+//création d'un message (d'erreur ou de succès, selon si le prioduit est rajouté ou pas dans le formulaire)
 $_SESSION['message'] = "Votre produit a été ajouté avec succès.";
 } else {
 $_SESSION['message'] = "Erreur";

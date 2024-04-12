@@ -108,14 +108,13 @@ echo "<p>Nombre total d'articles en session : ".$totalArticles."</p>";
      "</table>";
 }
 
-//TEST POUR VERIFIER SI CA FONCTIONNE:
+//TEST POUR VERIFIER SI LA FONCTION FONCTIONNE:
 $products = [
     ['name' => 'banane', 'price' => 1.25, 'qtt' => 3, 'total' => 3.75],
     ['name' => 'pomme', 'price' => 2.50, 'qtt' => 10, 'total' => 25.00]
 ];
 
 $_SESSION['products'] = $products;
-
 ?>
     
 </body>

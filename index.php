@@ -40,12 +40,13 @@
     </p>
   </form>
 
-<!--création d'un message (d'erreur ou de succès, selon si le prioduit est rajouté ou pas)-->
+<!--création d'un message (d'erreur ou de succès, selon si le prioduit est rajouté ou pas dans le forum)-->
   <?php
 session_start();
 
 if(isset($_SESSION['message'])){
     echo '<p>' . $_SESSION['message'] . '</p>';
+    unset($_SESSION['message']);// POUR SUPPRIMER LE MESSAGE
 }
 ?>
 
