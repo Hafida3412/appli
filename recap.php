@@ -84,6 +84,10 @@ $totalArticles+= $product['qtt'];
 
 /* grâce à l'opérateur combiné +=, on ajoute le total du produit 
 parcouru à la valeur de $totalGeneral, qui augmente d'autant pour chaque produit*/
+
+/*$totalArticles+= $product['qtt']: affiche le nombre de produits présents en session à tout moment, 
+quelle que soit la page affichée (on parle ici de la quantité totale d’articles, non pas du nombre 
+de produits distincts)*/
 }
 
 /*La fonction PHP number_format permet de modifier l'affichage d'une valeur numérique, en précisant:
@@ -107,6 +111,7 @@ echo "<p>Nombre total d'articles en session : ".$totalArticles."</p>";
 "</tbody>";
      "</table>";
 }
+
 
 //TEST POUR VERIFIER SI LA FONCTION FONCTIONNE:
 $products = [
