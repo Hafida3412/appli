@@ -1,6 +1,7 @@
 <?php
  session_start();
 
+  
  /*Ici, nous vérifions alors l'existence de la clé "submit" dans le tableau $_POST, celle clé 
 correspondant à l'attribut "name" du bouton <input type="submit" name="submit"> du 
 formulaire. La condition sera alors vraie seulement si la requête POST transmet bien une 
@@ -35,7 +36,6 @@ ajoutons une nouvelle entrée au futur tableau "products" associé à cette clé
                 -> $_SESSION["products"] doit être lui aussi un tableau afin d'y stocker de nouveaux 
 produits par la suite.*/
 
-
 //création d'un message (d'erreur ou de succès, selon si le prioduit est rajouté ou pas dans le formulaire)
 $_SESSION['message'] = "Votre produit a été ajouté avec succès.";
 } else {
@@ -43,7 +43,44 @@ $_SESSION['message'] = "Erreur";
 }
  }
 
-  header("Location:index.php"); //Avec le type d'appel "Location:", cette réponse est envoyée au client avec le
- // status code 302, qui indique une redirection. 
 
+ // Vérification de l'action à effectuer
+ if (isset($_GET['action'])) {
+     switch($_GET['action']) {
+         case 'delete':
+             // Supprimer un produit en session
+             $id_produit = $_GET['id_produit'];
+             unset($_SESSION['products'][$id_produit]);
+             $_SESSION['message'] = "Le produit a été supprimé avec succès.";
+             break;
+         case 'delete_all':
+             // Supprimer tous les produits en session
+             unset($_SESSION['products']);
+             $_SESSION['message'] = "Tous les produits ont été supprimés avec succès.";
+             break;
+         case 'update_quantity':
+             if (isset($_GET['increment'])) {
+                 // Modifier la quantité de produit en session
+                 $id_produit = $_GET['id_produit'];
+                 $increment = $_GET['increment'];
+ 
+                 if ($increment == '+') {
+                     $_SESSION['products'][$id_produit]['qtt']++;
+                     $_SESSION['products'][$id_produit]['total'] = $_SESSION['products'][$id_produit]['qtt'] * $_SESSION['products'][$id_produit]['price'];
+                 } elseif ($increment == '-') {
+                     $_SESSION['products'][$id_produit]['qtt']--;
+                     $_SESSION['products'][$id_produit]['total'] = $_SESSION['products'][$id_produit]['qtt'] * $_SESSION['products'][$id_produit]['price'];
+                 }
+                 $_SESSION['message'] = "La quantité du produit a été modifiée avec succès.";
+             }
+     }
+ }
+ 
+ // Redirection vers recap.php après traitement
+ header("Location: recap.php");
+
+
+
+
+ 
  

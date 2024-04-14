@@ -66,7 +66,6 @@ echo "<table>",                                                                 
 "<th>Prix</th>",
 "<th>Quantité</th>",
 "<th>Total</th>",
-"</tr>",
 "</thead>",
 "<tbody>";
 $totalGeneral = 0;
@@ -78,6 +77,9 @@ foreach($_SESSION['products'] as $index => $product){       //$index aura pour v
         "<td>".number_format($product['price'], 2, ",","&nbsp;")."&nbsp;€</td>",
         "<td>".$product['qtt']."</td>",
         "<td>".number_format($product['total'], 2, ",","&nbsp;")."&nbsp;€</td>",
+        "<td><a href='traitement.php?action=delete&id_produit=".$index."'>Supprimer</a></td>",
+        "<td><a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=+'>+</a></td>",
+        "<td><a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=-'>-</a></td>",
         "</tr>";
 $totalGeneral+= $product['total']; 
 $totalArticles+= $product['qtt'];
@@ -89,6 +91,7 @@ parcouru à la valeur de $totalGeneral, qui augmente d'autant pour chaque produi
 quelle que soit la page affichée (on parle ici de la quantité totale d’articles, non pas du nombre 
 de produits distincts)*/
 }
+
 
 /*La fonction PHP number_format permet de modifier l'affichage d'une valeur numérique, en précisant:
     number_format(
@@ -105,7 +108,8 @@ pour l'intitulé, et une cellule affichant le contenu formaté de $totalGeneral 
 number_format()*/
 echo "<tr>",
       "<td colspan=4>Total général: </td>",
-      "<td><strong>".number_format($totalGeneral, 2, ",","&nbsp;")."&nbsp;€<strong></td>",
+      "<td><strong>".number_format($totalGeneral, 2, ",","&nbsp;")."&nbsp;€</strong></td>",
+      "<td><a href='traitement.php?action=delete_all'>Supprimer tous les produits</a></td>",
       "</tr>";
 echo "<p>Nombre total d'articles en session : ".$totalArticles."</p>";
 "</tbody>";
@@ -120,6 +124,7 @@ $products = [
 ];
 
 $_SESSION['products'] = $products;
+
 ?>
     
 </body>
