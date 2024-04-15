@@ -43,7 +43,6 @@ $_SESSION['message'] = "Erreur";
 }
  }
 
-
  // Vérification de l'action à effectuer
  /*Ce code est comme un guide pour dire au site Web ce qu'il doit faire lorsque 
  quelqu'un clique sur un bouton spécifique. Le "if" vérifie si une certaine action a été déclenchée,
@@ -64,17 +63,17 @@ $_SESSION['message'] = "Erreur";
              $_SESSION['message'] = "Tous les produits ont été supprimés avec succès.";
              break;
          
-             case 'update_quantity':
+            case 'update_quantity':
              if (isset($_GET['increment'])) {
                  // Modifier la quantité de produit en session
                  $id_produit = $_GET['id_produit'];/* Le $_GET est une superglobale en PHP qui permet de 
 récupérer des données envoyées en paramètre par la méthode GET dans l'URL. Dans ce cas, $_GET['id_produit'] 
 va récupérer la valeur de l'attribut 'id_produit' dans l'URL et la stocker dans la variable $id_produit.*/
-                 $increment = $_GET['increment'];/*permet de récupérer la valeur du paramètre "increment"
+                $increment = $_GET['increment'];/*permet de récupérer la valeur du paramètre "increment"
  qui est passé dans l'URL de la requête. La valeur de ce paramètre est ensuite stockée dans la variable
  $increment. Cela permet de récupérer des données transmises via la méthode GET dans un formulaire ou un 
  lien URL.*/
-          if ($increment == '+') {
+        if ($increment == '+') {
 $_SESSION['products'][$id_produit]['qtt']++;//à chaque fois que cette ligne de code est exécutée, la quantité du produit avec l'identifiant $id_produit stocké dans la variable de session $_SESSION['products'] est augmentée de 1.
 $_SESSION['products'][$id_produit]['total'] = $_SESSION['products'][$id_produit]['qtt'] * $_SESSION['products'][$id_produit]['price'];// le total du produit correspond au produit de la quantité du produit et son prix. Le total est donc calculé en multipliant la quantité du produit par son prix.
           } elseif ($increment == '-') {
@@ -82,16 +81,8 @@ $_SESSION['products'][$id_produit]['qtt']--;
 $_SESSION['products'][$id_produit]['total'] = $_SESSION['products'][$id_produit]['qtt'] * $_SESSION['products'][$id_produit]['price'];
           }
 $_SESSION['message'] = "La quantité du produit a été modifiée avec succès.";
-         }
-     }
- }
- 
- // Redirection vers recap.php après traitement
- /*header("Location: recap.php");*/
- header("Location: recap.php?message=" . urlencode($_SESSION['message']));
 
-
-
-
- 
- 
+        }
+    }
+    header("Location: recap.php?message=" . urlencode($_SESSION['message']));
+}

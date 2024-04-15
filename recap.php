@@ -75,16 +75,16 @@ foreach($_SESSION['products'] as $index => $product){       //$index aura pour v
         "<td>".$index."</td>",                                                   //et stocké en session le fichier traitement.php
         "<td>".$product['name']."</td>",
         "<td>".number_format($product['price'], 2, ",","&nbsp;")."&nbsp;€</td>",
-        "<td>".$product['qtt'].
-        "<a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=+'>+</a>
-        <a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=-'>-</a></td>",
+        "<td>". 
+"<a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=+' class='btn btn-plus'>+</a> 
+<span class='qtt'>".$product['qtt']."</span> 
+<a href='traitement.php?action=update_quantity&id_produit=".$index."&increment=-' class='btn btn-minus'>-</a></td>",
         "<td>".number_format($product['total'], 2, ",","&nbsp;")."&nbsp;€</td>",
         "<td><a href='traitement.php?action=delete&id_produit=".$index."'>Supprimer</a></td>",
         "</tr>";
 $totalGeneral+= $product['total']; 
 $totalArticles+= $product['qtt'];
-
-
+}
 //Pour afficher les messages suite à une action (ajout, suppression....)
 if (isset($_GET['message'])) {             
     $message = urldecode($_GET['message']);
@@ -98,7 +98,7 @@ parcouru à la valeur de $totalGeneral, qui augmente d'autant pour chaque produi
 quelle que soit la page affichée (on parle ici de la quantité totale d’articles, non pas du nombre 
 de produits distincts)*/
 
-}
+
 
 
 /*La fonction PHP number_format permet de modifier l'affichage d'une valeur numérique, en précisant:
@@ -120,8 +120,8 @@ echo "<tr>",
       "<td><a href='traitement.php?action=delete_all'>Supprimer tous les produits</a></td>",
       "</tr>";
 echo "<p>Nombre total d'articles en session : ".$totalArticles."</p>";
-"</tbody>";
-     "</table>";
+echo "</tbody>";
+echo    "</table>";//FERMETURE DE LA TABLE
 }
 
 
@@ -134,16 +134,38 @@ $products = [
 $_SESSION['products'] = $products;
 
 ?>
-    <style>
-        table {
-            margin-top: 20px;
-        }
+<style>
+table {
+  margin-top: 20px;
+}
 
-        table th, table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ccc;
-        }
+table th, table td {
+ padding: 8px;
+ text-align: left;
+ border-bottom: 1px solid #ccc;
+}
+
+.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.btn-plus {
+  background-color: green;
+}
+
+.btn-minus {
+  background-color: red;
+}
+
+.qtt {
+  font-weight: bold;
+}
     </style>
 
 </body>
