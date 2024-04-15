@@ -57,7 +57,7 @@ $_SESSION['message'] = "Erreur";
              unset($_SESSION['products'][$id_produit]);//Dans la variable de session $_SESSION['products'], il y a une clé correspondant à l'id du produit ($id_produit) et la valeur associée à cette clé est la donnée concernant ce produit
              $_SESSION['message'] = "Le produit a été supprimé avec succès.";//variable de session nommée "message" en PHP. Cette variable est utilisée pour stocker des messages temporaires
              break;// l'instruction break est utilisée pour sortir d'une boucle for, foreach, while, ou do-while prématurément
-        
+          
              case 'delete_all':
              // Supprimer tous les produits en session
              unset($_SESSION['products']);
