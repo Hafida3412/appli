@@ -87,7 +87,8 @@ $_SESSION['message'] = "La quantité du produit a été modifiée avec succès."
  }
  
  // Redirection vers recap.php après traitement
- header("Location: recap.php");
+ /*header("Location: recap.php");*/
+ header("Location: recap.php?message=" . urlencode($_SESSION['message']));
 
 
 
